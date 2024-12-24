@@ -1,7 +1,7 @@
 {
   "name": "OpenSesame",
   "author": "Searica",
-  "version_number": "0.1.0",
+  "version_number": "0.1.1",
   "website_url": "https://discord.gg/sFmGTBYN6n",
   "description": "Makes you become the owner of a door before opening it, should reduce issues with being unable to open doors in multiplayer.",
   "dependencies": [
