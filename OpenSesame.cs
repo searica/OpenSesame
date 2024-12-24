@@ -46,11 +46,7 @@ internal static class DoorPatches
     [HarmonyPatch(typeof(Door), nameof(Door.Open))]
     public static void Door_Open_Prefix(Door __instance)
     {
-        if (!__instance || !__instance.m_nview)
-        {
-            return;
-        }
-        if (!__instance.m_nview.IsValid() || __instance.m_nview.IsOwner())
+        if (!__instance || !__instance.m_nview || !__instance.m_nview.IsValid())
         {
             return;
         }
