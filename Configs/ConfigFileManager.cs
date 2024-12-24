@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using BepInEx;
 using BepInEx.Configuration;
-using TerrainTools.Extensions;
+using OpenSesame.Extensions;
 
-namespace TerrainTools.Configs;
+namespace OpenSesame.Configs;
 
 
 /// <summary>

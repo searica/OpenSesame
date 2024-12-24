@@ -8,6 +8,7 @@ using HarmonyLib;
 using System.Reflection;
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 namespace OpenSesame;
 
@@ -18,8 +19,6 @@ internal sealed class OpenSesame : BaseUnityPlugin
     public const string PluginName = "OpenSesame";
     public const string PluginGUID = $"{Author}.Valheim.{PluginName}";
     public const string PluginVersion = "0.1.0";
-
-
 
     public void Awake()
     {
@@ -32,9 +31,7 @@ internal sealed class OpenSesame : BaseUnityPlugin
 
     }
 
-    public void OnDestroy()
-    {
-    }
+    public void OnDestroy() { }
 }
 
 
@@ -49,7 +46,11 @@ internal static class DoorPatches
     [HarmonyPatch(typeof(Door), nameof(Door.Open))]
     public static void Door_Open_Prefix(Door __instance)
     {
-        if (!__instance || !__instance.m_nview || !__instance.m_nview.IsValid())
+        if (!__instance || !__instance.m_nview)
+        {
+            return;
+        }
+        if (!__instance.m_nview.IsValid() || __instance.m_nview.IsOwner())
         {
             return;
         }
@@ -146,7 +147,7 @@ internal static class Log
 
         try
         {
-            PropertyInfo[] properties = compo.GetType().GetProperties(ReflectionUtils.AllBindings);
+            List<PropertyInfo> properties = AccessTools.GetDeclaredProperties(compo.GetType());
             foreach (PropertyInfo property in properties)
             {
                 try
@@ -168,7 +169,7 @@ internal static class Log
 
         try
         {
-            FieldInfo[] fields = compo.GetType().GetFields(ReflectionUtils.AllBindings);
+            List<FieldInfo> fields = AccessTools.GetDeclaredFields(compo.GetType());
             foreach (FieldInfo field in fields)
             {
                 try
