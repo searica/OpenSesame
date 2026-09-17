@@ -18,7 +18,7 @@ internal sealed class OpenSesame : BaseUnityPlugin
     internal const string Author = "Searica";
     public const string PluginName = "OpenSesame";
     public const string PluginGUID = $"{Author}.Valheim.{PluginName}";
-    public const string PluginVersion = "0.1.1";
+    public const string PluginVersion = "1.0.0";
 
     public void Awake()
     {
